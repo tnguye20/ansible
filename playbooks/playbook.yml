@@ -1,0 +1,7 @@
+- name: Ensure something is happening in the playbook
+  hosts: localhost
+  tasks:
+  - pacman:
+      name: "sshpass"
+      state: "latest"
+    become: yes
