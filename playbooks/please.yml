@@ -6,7 +6,7 @@
       command: echo "Please"
       register: please_var
     - name: Debug this process
-      debug: var=please_var
+      debug: var=please_var.stdout_lines
     - name: Install sl
       pacman:
         name: sl
