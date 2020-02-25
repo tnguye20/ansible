@@ -5,5 +5,6 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/9b28d8ce/
+Doom Machine - Thang's script To start a Computer up and running	playbooks/doomMachine.yml	/^- name: Doom Machine - Thang's script To start a Computer up and running$/;"	p
 Ensure something is happening in the playbook	playbooks/playbook.yml	/^- name: Ensure something is happening in the playbook$/;"	p
 Installation of Apps	playbooks/please.yml	/^- name: Installation of Apps$/;"	p

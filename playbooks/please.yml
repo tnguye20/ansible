@@ -1,5 +1,5 @@
 - name: Installation of Apps
-  hosts: arch
+  hosts: arch_one
   gather_facts: true
   tasks:
     - name: Please Check This

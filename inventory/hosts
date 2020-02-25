@@ -1,10 +1,13 @@
-[all:children]
-arch
-ubuntu
-
-[arch]
-172.19.0.2
-172.19.0.3
-
-[ubuntu]
-172.23.0.4
+all:
+  hosts:
+  children:
+    arch:
+      children:
+        arch_one:
+        arch_two:
+    arch_one:
+      hosts:
+        172.19.0.2:
+    arch_two:
+      hosts:
+        172.19.0.3:
