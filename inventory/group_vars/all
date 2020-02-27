@@ -5,3 +5,6 @@ user_groups:
   - sys
   - network
   - lp
+packages_gits:
+  - "https://aur.archlinux.org/ttf-iosevka.git"
+  - "https://aur.archlinux.org/forticlientsslvpn.git"

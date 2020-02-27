@@ -1,0 +1,16 @@
+    - set_fact:
+        packages_dir: "/home/{{ user }}/packages"
+    - debug:
+    - name: Ensure packages directory exists
+      file:
+        path: "{{ packages_dir }}"
+        state: directory
+        mode: '0755'
+        owner: "{{ user }}"
+      become_user: "{{ user }}"
+    - name: Clone all packages
+      shell:
+        cmd: "git clone {{ item }}"
+        chdir: "{{ packages_dir }}"
+      loop: "{{ packages_gits }}"
+      become_user: "{{ user }}"

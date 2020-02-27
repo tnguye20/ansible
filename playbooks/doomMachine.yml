@@ -19,11 +19,6 @@
   become: yes
 
   tasks:
-    - import_tasks: addUser.yml
-    # - name: Create packages directory
-    #   git:
-    #     repo: 'https://github.com/tnguye20/scripts.git'
-    #     clone: yes
-    #     dest: "/home/{{ user }}/scripts"
-    #   become_user: "{{ user }}"
+    # - import_tasks: addUser.yml
+    - import_tasks: build_packages.yml
 
