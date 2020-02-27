@@ -1,0 +1,16 @@
+    - debug:
+        msg: "Logging in as {{ user }}"
+    - name: Create user "{{ user }}"
+      user:
+        home: "/home/{{ user }}/"
+        name: "{{ user }}"
+        password: "{{ passwd }}"
+        shell: /bin/bash
+        uid: 1000
+        groups: "{{ user_groups }}"
+    - name: Enable sudo privilege
+      lineinfile:
+        state: present
+        path: /etc/sudoers
+        line: "{{ user }}     ALL=(ALL) NOPASSWD:ALL"
+        create: yes

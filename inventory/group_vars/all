@@ -1,1 +1,7 @@
 ansible_user: "root"
+user_groups:
+  - wheel
+  - power
+  - sys
+  - network
+  - lp

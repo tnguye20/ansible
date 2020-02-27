@@ -1,18 +1,29 @@
 - name: Doom Machine - Thang's script To start a Computer up and running
   hosts: arch_two
   gather_facts: true
+
+  vars:
+    group_lists:
+      - all
+
+  vars_prompt:
+    - name: user
+      prompt: "Please Enter Your Username"
+      private: no
+      default: "tnguyen"
+    - name: passwd
+      prompt: "Please Enter Your Password"
+      private: no
+      default: "please"
+
+  become: yes
+
   tasks:
-    - name: Install Git
-      package:
-        name: git
-        state: latest
-    - name: Install sl
-      package:
-        name: cowsay
-        state: latest
-    - name: Get Scripts
-      git:
-        repo: 'https://github.com/tnguye20/scripts.git'
-        clone: yes
-        dest: /home/root/scripts
+    - import_tasks: addUser.yml
+    # - name: Create packages directory
+    #   git:
+    #     repo: 'https://github.com/tnguye20/scripts.git'
+    #     clone: yes
+    #     dest: "/home/{{ user }}/scripts"
+    #   become_user: "{{ user }}"
 
