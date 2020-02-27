@@ -7,7 +7,7 @@ all:
         arch_two:
     arch_one:
       hosts:
-        172.19.0.2:
+        10.1.2.105:
     arch_two:
       hosts:
-        172.19.0.3:
+        10.1.2.105:

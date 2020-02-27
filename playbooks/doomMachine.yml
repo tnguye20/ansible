@@ -1,10 +1,14 @@
 - name: Doom Machine - Thang's script To start a Computer up and running
-  hosts: arch_one
+  hosts: arch_two
   gather_facts: true
   tasks:
     - name: Install Git
-      pacman:
+      package:
         name: git
+        state: latest
+    - name: Install sl
+      package:
+        name: cowsay
         state: latest
     - name: Get Scripts
       git:
