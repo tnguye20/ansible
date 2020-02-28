@@ -1,0 +1,61 @@
+      - name: Get my st build
+        git:
+          repo: https://github.com/tnguye20/st.git
+          dest: "~/st"
+          clone: yes
+          update: yes
+        register: st_register
+      - name: Make st
+        shell:
+          cmd: "make && sudo make install"
+          chdir: "~/st"
+        when: st_register.changed
+
+      - name: Get Bumblebee Status
+        git:
+          repo: https://github.com/tobi-wan-kenobi/bumblebee-status.git
+          dest: "~/bumblebee-status"
+          clone: yes
+          update: yes
+
+      - name: Get Oh My Tmux
+        git:
+          repo: https://github.com/gpakosz/.tmux.git
+          dest: "~/.tmux"
+          clone: yes
+          update: yes
+      - name: Symlink tmux config
+        file:
+          src: "~/.tmux/.tmux.conf"
+          dest: "~/.tmux.conf"
+          state: link
+
+      - name: Check if Oh My ZSH exists
+        file:
+          path: "~/.oh-my-zsh"
+          state: directory
+          mode: "0755"
+        register: ohmyzsh_register
+      - name: Get Oh My ZSH
+        shell:
+          cmd: "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended"
+        when: ohmyzsh_register.changed
+
+      - name: Init Tridactyl
+        shell:
+          cmd: "curl -fsSl https://raw.githubusercontent.com/tridactyl/tridactyl/master/native/install.sh -o /tmp/trinativeinstall.sh && bash /tmp/trinativeinstall.sh master"
+
+      - name: Get Git LFS Tar File
+        shell:
+          cmd: "rm -rf ~/packages/lfs/* && curl -L \"https://github.com/git-lfs/git-lfs/releases/download/v2.7.2/git-lfs-linux-amd64-v2.7.2.tar.gz\" > lfs.tar.gz"
+          chdir: "~/packages/lfs"
+      - name: Untar Git LFS
+        shell:
+          cmd: "tar -xvzf lfs.tar.gz"
+          chdir: "~/packages/lfs"
+        register: untar_lfs_register
+      - name: Install Git LFS
+        shell:
+          cmd: "sudo sh install.sh"
+          chdir: "~/packages/lfs"
+        when: untar_lfs_register.rc == 0

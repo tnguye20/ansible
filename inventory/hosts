@@ -5,9 +5,9 @@ all:
       children:
         arch_one:
         arch_two:
-    arch_one:
-      hosts:
-        localhost:
-    arch_two:
-      hosts:
-        localhost:
+arch_one:
+  hosts:
+    localhost:
+arch_two:
+  hosts:
+    localhost:

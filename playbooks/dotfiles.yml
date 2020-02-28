@@ -1,0 +1,7 @@
+      - name: Get my st build
+        git:
+          repo: https://github.com/tnguye20/st.git
+          dest: "~/st"
+          clone: yes
+          update: yes
+        register: st_register

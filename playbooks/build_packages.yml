@@ -1,21 +1,25 @@
     - set_fact:
-        packages_dir: "/home/{{ user }}/packages"
+        packages_dir: "~/packages"
+        screnshot_dir: "~/Pictures/Screenshots"
+        mpd_dir: "~/.config/mpd"
+        mpd_pl_dir: "~/.config/mpd/playlist"
     - debug:
     - name: Erase packages directory to start over
       file:
         path: "{{ packages_dir }}"
         state: absent
-      become_user: "{{ user }}"
     - name: Ensure packages directory exists
       file:
         path: "{{ packages_dir }}"
         state: directory
         mode: '0755'
         owner: "{{ user }}"
-      become_user: "{{ user }}"
     - name: Clone all packages
       shell:
         cmd: "git clone {{ item }}"
         chdir: "{{ packages_dir }}"
       loop: "{{ packages_gits }}"
-      become_user: "{{ user }}"
+    - name: Makepkg and cleanup
+      shell:
+        cmd: "ls | xargs -I {} sh -c \"cd {}; makepkg -sic --noconfirm; cd -\""
+        chdir: "{{ packages_dir }}"

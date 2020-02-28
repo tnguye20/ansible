@@ -1,0 +1,9 @@
+    - set_fact:
+        basic_dir: [ "~/.config/mpd",  "~/.config/mpd/playlist", "~/packages/lfs" ]
+    - name: Ensure packages directory exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+        owner: "{{ user }}"
+      loop: "{{ basic_dir }}"

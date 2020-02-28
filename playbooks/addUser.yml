@@ -1,5 +1,3 @@
-    - debug:
-        msg: "Logging in as {{ user }}"
     - name: Create user "{{ user }}"
       user:
         home: "/home/{{ user }}/"

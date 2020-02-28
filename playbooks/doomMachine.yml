@@ -1,5 +1,5 @@
 - name: Doom Machine - Thang's script To start a Computer up and running
-  hosts: arch_two
+  hosts: arch
   gather_facts: true
 
   vars:
@@ -11,14 +11,23 @@
       prompt: "Please Enter Your Username"
       private: no
       default: "tnguyen"
+    - name: email
+      prompt: "Please Enter Your Email"
+      private: no
+      default: "tnguye20@uvm.edu"
     - name: passwd
       prompt: "Please Enter Your Password"
-      private: no
+      private: yes
       default: "please"
 
   become: yes
 
   tasks:
-    - import_tasks: addUser.yml
-    - import_tasks: build_packages.yml
+    # - import_tasks: addUser.yml
+    - block:
+      # - import_tasks: build_packages.yml
+      # - import_tasks: basicDir.yml
+      # - import_tasks: sshKey.yml
+      - import_tasks: utilities_install.yml
+      become_user: "{{ user }}"
 
