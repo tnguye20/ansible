@@ -8,3 +8,6 @@ user_groups:
 packages_gits:
   - "https://aur.archlinux.org/ttf-iosevka.git"
   - "https://aur.archlinux.org/forticlientsslvpn.git"
+  - "https://aur.archlinux.org/fpp-git.git"
+  - "https://aur.archlinux.org/slack-desktop.git"
+  - "https://aur.archlinux.org/universal-ctags-git.git"

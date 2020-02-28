@@ -1,6 +1,11 @@
     - set_fact:
         packages_dir: "/home/{{ user }}/packages"
     - debug:
+    - name: Erase packages directory to start over
+      file:
+        path: "{{ packages_dir }}"
+        state: absent
+      become_user: "{{ user }}"
     - name: Ensure packages directory exists
       file:
         path: "{{ packages_dir }}"

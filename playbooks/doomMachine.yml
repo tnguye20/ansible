@@ -19,6 +19,6 @@
   become: yes
 
   tasks:
-    # - import_tasks: addUser.yml
+    - import_tasks: addUser.yml
     - import_tasks: build_packages.yml
 
