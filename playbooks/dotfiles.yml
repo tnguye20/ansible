@@ -1,7 +1,66 @@
-      - name: Get my st build
+      - name: Get my dotfiles
         git:
-          repo: https://github.com/tnguye20/st.git
-          dest: "~/st"
+          repo: https://github.com/tnguye20/.dotfiles.git
+          dest: "~/.dotfiles"
           clone: yes
           update: yes
-        register: st_register
+        register: dotfiles_register
+      - name: Get LFS files as well
+        shell:
+          cmd: "git lfs install && git lfs pull"
+          chdir: "~/.dotfiles"
+
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.vimrc"
+          dest: "~/.vimrc"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.zshrc"
+          dest: "~/.zshrc"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.tridactylrc"
+          dest: "~/.tridactylrc"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.i3/config"
+          dest: "~/.config/.i3/config"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.config/mpd/mpd.conf"
+          dest: "~/.config/mpd/"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.config/ranger/rc.conf"
+          dest: "~/.config/ranger/rc.conf"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.gitconfig"
+          dest: "~/.gitconfig"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.profile"
+          dest: "~/.profile"
+          state: link
+      - name: Symlink Config
+        file:
+          force: yes
+          src: "~/.dotfiles/.cool-retro-term"
+          dest: "~/.cool-retro-term"
+          state: link

@@ -31,15 +31,17 @@
           state: link
 
       - name: Check if Oh My ZSH exists
-        file:
+        stat:
           path: "~/.oh-my-zsh"
-          state: directory
-          mode: "0755"
         register: ohmyzsh_register
       - name: Get Oh My ZSH
         shell:
           cmd: "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended"
-        when: ohmyzsh_register.changed
+        when: ohmyzsh_register.stat.exists and ohmyzsh_register.stat.isdir
+      - name: Get Antigen
+        shell:
+          cmd: "curl -L git.io/antigen > /home/$user/antigen.zsh"
+        when: ohmyzsh_register.stat.exists and ohmyzsh_register.stat.isdir
 
       - name: Init Tridactyl
         shell:

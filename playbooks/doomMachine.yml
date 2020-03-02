@@ -23,11 +23,12 @@
   become: yes
 
   tasks:
-    # - import_tasks: addUser.yml
+    - import_tasks: addUser.yml
     - block:
-      # - import_tasks: build_packages.yml
-      # - import_tasks: basicDir.yml
-      # - import_tasks: sshKey.yml
+      - import_tasks: build_packages.yml
+      - import_tasks: basicDir.yml
+      - import_tasks: sshKey.yml
       - import_tasks: utilities_install.yml
+      - import_tasks: dotfiles.yml
       become_user: "{{ user }}"
 
