@@ -38,7 +38,7 @@
         file:
           force: yes
           src: "~/.dotfiles/.config/mpd/mpd.conf"
-          dest: "~/.config/mpd/"
+          dest: "~/.config/mpd/mpd.conf"
           state: link
       - name: Symlink Config
         file:
