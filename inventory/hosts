@@ -1,13 +1,9 @@
-all:
-  hosts:
-  children:
-    arch:
-      children:
-        arch_one:
-        arch_two:
-arch_one:
-  hosts:
-    localhost:
-arch_two:
-  hosts:
-    localhost:
+[all:children]
+arch_one
+arch_two
+
+[arch_one]
+172.19.0.2
+
+[arch_two]
+172.19.0.3

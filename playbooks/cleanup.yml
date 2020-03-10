@@ -1,0 +1,35 @@
+      - name: Check if i3 exists
+        stat:
+          path: "/usr/bin/i3"
+        register: i3_register
+      - name: Preset for vim to be automatic
+        replace:
+          path: "~/.vimrc"
+          regexp: "^colorscheme"
+          replace: "\" colorscheme"
+      - name: Preset for vim to be automatic
+        replace:
+          path: "~/.vimrc"
+          regexp: "^Plug.*coc"
+          replace: "\" Plug 'neoclide\/coc"
+      - name: PlugUpdate and PlugInstall for vim
+        shell:
+          cmd: "vim +'PlugUpdate' +qa && vim +'PlugInstall' +qa"
+          chdir: "~"
+      - name: Source .vimrc
+        shell:
+          cmd: "vim +'source %' +qa"
+          chdir: "~"
+      - name: Set default shell to zsh
+        shell:
+          cmd: "sudo usermod --shell /bin/zsh {{ user }}"
+      - name: Restart i3
+        shell:
+         cmd: "i3-msg reload"
+        when: i3_register.stat.exists
+      - name: Update Permission
+        shell:
+          cmd: "sudo chown -R {{ user }}:{{ user }} ~"
+      - name: Kick you into ZSH
+        shell:
+          cmd: "zsh &"

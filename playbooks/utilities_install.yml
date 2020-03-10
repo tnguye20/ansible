@@ -11,6 +11,11 @@
           chdir: "~/st"
         when: st_register.changed
 
+      - name: Install Vim Plug
+        shell:
+          cmd: "curl -fLo /home/{{ user }}/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+          chdir: "~"
+
       - name: Get Bumblebee Status
         git:
           repo: https://github.com/tobi-wan-kenobi/bumblebee-status.git
@@ -40,8 +45,7 @@
         when: ohmyzsh_register.stat.exists and ohmyzsh_register.stat.isdir
       - name: Get Antigen
         shell:
-          cmd: "curl -L git.io/antigen > /home/$user/antigen.zsh"
-        when: ohmyzsh_register.stat.exists and ohmyzsh_register.stat.isdir
+          cmd: "curl -L git.io/antigen > /home/{{ user }}/antigen.zsh"
 
       - name: Init Tridactyl
         shell:
@@ -61,3 +65,4 @@
           cmd: "sudo sh install.sh"
           chdir: "~/packages/lfs"
         when: untar_lfs_register.rc == 0
+

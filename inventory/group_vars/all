@@ -13,3 +13,37 @@ packages_gits:
   - "https://aur.archlinux.org/fpp-git.git"
   - "https://aur.archlinux.org/slack-desktop.git"
   - "https://aur.archlinux.org/universal-ctags-git.git"
+packages:
+  - base-devel
+  - make
+  - sudo
+  - zsh
+  - ranger
+  - bat
+  - terminology
+  - gvim
+  - copyq
+  - figlet
+  - xorg-server
+  - cmatrix
+  - neofetch
+  - gifsicle
+  - cool-retro-term
+  - lxappearance
+  - ripgrep
+  - poppler
+  - npm
+  - nodejs
+  - firefox
+  - firefox-tridactyl
+  - docker
+  - cmus
+  - mpd ncmpcpp mpc
+  - calcurse
+  - flameshot
+  - git
+  - meld
+  - xclip
+  - feh
+  - python-pip
+  - python-pywal

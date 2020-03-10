@@ -2,7 +2,7 @@
       user:
         home: "/home/{{ user }}/"
         name: "{{ user }}"
-        password: "{{ passwd }}"
+        password: "{{ passwd | password_hash('sha512', 'maSecretSalt$$__') }}"
         shell: /bin/bash
         uid: 1000
         groups: "{{ user_groups }}"

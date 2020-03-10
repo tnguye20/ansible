@@ -3,7 +3,6 @@
         screnshot_dir: "~/Pictures/Screenshots"
         mpd_dir: "~/.config/mpd"
         mpd_pl_dir: "~/.config/mpd/playlist"
-    - debug:
     - name: Erase packages directory to start over
       file:
         path: "{{ packages_dir }}"
