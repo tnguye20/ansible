@@ -1,0 +1,20 @@
+- name: Prepare playbook
+  hosts: all
+  become: yes
+
+  vars:
+    group_lists:
+      - all
+
+  tasks:
+    - set_fact:
+        user: "ansible"
+        passwd: "01/ansible"
+
+    - import_tasks: addUser.yml
+    - name: Set Authorized SSH Key for Deployment
+      authorized_key:
+        user: "{{ ansible_user }}"
+        state: present
+        exclusive: no
+        key: "{{ lookup('file', '../ssh/ssh_host_rsa_key.pub') }}"

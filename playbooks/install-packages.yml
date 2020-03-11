@@ -1,6 +1,12 @@
-    - name: Install packages using default Package Manager
-      package:
-        name: "{{ item }}"
-        state: latest
-      loop: "{{ packages }}"
-      become_user: "root"
+      - block:
+        - name: Uninstall Vim and urxvt due to conflict with gvim
+          package:
+            name:
+              - vim
+            state: absent
+        - name: Install packages using default Package Manager
+          package:
+            name: "{{ item }}"
+            state: latest
+          loop: "{{ packages }}"
+        become_user: "root"

@@ -20,5 +20,5 @@
       loop: "{{ packages_gits }}"
     - name: Makepkg and cleanup
       shell:
-        cmd: "ls | xargs -I {} sh -c \"cd {}; makepkg -sic --noconfirm; cd -\""
+        cmd: "ls | xargs -I {} sh -c \"cd {}; makepkg -sicf --noconfirm; cd -\""
         chdir: "{{ packages_dir }}"

@@ -4,6 +4,7 @@
           dest: "~/scripts"
           clone: yes
           update: yes
+          force: yes
         register: scripts_register
 
       - name: Get my dotfiles
@@ -12,63 +13,81 @@
           dest: "~/.dotfiles"
           clone: yes
           update: yes
+          force: yes
         register: dotfiles_register
-      - name: Get LFS files as well
-        shell:
-          cmd: "git lfs install && git lfs pull"
-          chdir: "~/.dotfiles"
+      - name: Check post-merge hook for conflict
+        stat:
+          path: "~/.dotfiles/.githooks"
+        register: pm_register
 
-      - name: Symlink Config
+      - name: Init LFS
+        shell:
+          cmd: "git lfs install"
+          chdir: "~/.dotfiles"
+        when: pm_register.stat.exists == False
+      - name: Pull LFS files
+        shell:
+          cmd: "git lfs pull"
+          chdir: "~/.dotfiles"
+        when: pm_register.stat.exists == False
+
+      - name: Symlink .vimrc
         file:
           force: yes
           src: "~/.dotfiles/.vimrc"
           dest: "~/.vimrc"
           state: link
-      - name: Symlink Config
+      - name: Symlink .zshrc
         file:
           force: yes
           src: "~/.dotfiles/.zshrc"
           dest: "~/.zshrc"
           state: link
-      - name: Symlink Config
+      - name: Symlink .tridactylrc
         file:
           force: yes
           src: "~/.dotfiles/.tridactylrc"
           dest: "~/.tridactylrc"
           state: link
-      - name: Symlink Config
+      - name: Symlink i3 config
         file:
           force: yes
           src: "~/.dotfiles/.i3/config"
-          dest: "~/.config/.i3/config"
+          dest: "~/.i3/config"
           state: link
-      - name: Symlink Config
+      - name: Symlink mpd config
         file:
           force: yes
           src: "~/.dotfiles/.config/mpd/mpd.conf"
           dest: "~/.config/mpd/mpd.conf"
           state: link
-      - name: Symlink Config
+      - name: Symlink ranger config
         file:
           force: yes
           src: "~/.dotfiles/.config/ranger/rc.conf"
           dest: "~/.config/ranger/rc.conf"
           state: link
-      - name: Symlink Config
+      - name: Symlink .gitconfig
         file:
           force: yes
           src: "~/.dotfiles/.gitconfig"
           dest: "~/.gitconfig"
           state: link
-      - name: Symlink Config
+      - name: Symlink .profile
         file:
           force: yes
           src: "~/.dotfiles/.profile"
           dest: "~/.profile"
           state: link
-      - name: Symlink Config
+      - name: Symlink cool-retro-term profiles
         file:
           force: yes
           src: "~/.dotfiles/.cool-retro-term"
           dest: "~/.cool-retro-term"
+          state: link
+      - name: Symlink Xresources for urxvt
+        file:
+          force: yes
+          src: "~/.dotfiles/.Xresources"
+          dest: "~/.Xresources"
           state: link

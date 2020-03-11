@@ -1,3 +1,11 @@
+    - debug:
+        msg: "Creating user {{ user }}"
+    - name: Add ansible group
+      group:
+        name: ansible
+        state: present
+      when: "user == 'ansible'"
+
     - name: Install sudo for escalated privileges
       package:
         name: sudo
@@ -9,7 +17,6 @@
         name: "{{ user }}"
         password: "{{ passwd | password_hash('sha512', 'maSecretSalt$$__') }}"
         shell: /bin/bash
-        uid: 1000
         groups: "{{ user_groups }}"
     - name: Enable sudo privilege
       lineinfile:
@@ -17,3 +24,11 @@
         path: /etc/sudoers
         line: "{{ user }}     ALL=(ALL) NOPASSWD:ALL"
         create: yes
+    - name: Add sudoers users to the ansible group
+      user:
+        name: ansible
+        state: present
+        group: ansible
+        groups: ansible
+        comment: "Ansible user"
+      when: "user == 'ansible'"

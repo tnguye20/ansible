@@ -2,6 +2,10 @@
         stat:
           path: "/usr/bin/i3"
         register: i3_register
+      - name: Check if i3 socket exists
+        stat:
+          path: "/tmp/i3-ipc.sock"
+        register: i3_socket_register
       - name: Preset for vim to be automatic
         replace:
           path: "~/.vimrc"
@@ -22,11 +26,12 @@
           chdir: "~"
       - name: Set default shell to zsh
         shell:
-          cmd: "sudo usermod --shell /bin/zsh {{ user }}"
+          cmd: "usermod --shell /bin/zsh {{ user }}"
+        become_user: "root"
       - name: Restart i3
         shell:
          cmd: "i3-msg reload"
-        when: i3_register.stat.exists
+        when: i3_register.stat.exists and i3_socket_register.stat.exists
       - name: Update Permission
         shell:
           cmd: "sudo chown -R {{ user }}:{{ user }} ~"

@@ -1,5 +1,5 @@
     - set_fact:
-        basic_dir: [ "~/.config/.i3", "~/.config/mpd",  "~/.config/mpd/playlist", "~/packages/lfs", "~/.config/ranger" ]
+        basic_dir: [ "~/repo", "~/.i3", "~/.config/mpd",  "~/.config/mpd/playlist", "~/packages/lfs", "~/.config/ranger" ]
     - name: Ensure packages directory exists
       file:
         path: "{{ item }}"
