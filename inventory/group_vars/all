@@ -38,7 +38,9 @@ packages:
   - firefox-tridactyl
   - docker
   - cmus
-  - mpd ncmpcpp mpc
+  - mpd
+  - ncmpcpp
+  - mpc
   - calcurse
   - flameshot
   - git

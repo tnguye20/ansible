@@ -1,3 +1,8 @@
+    - name: Install sudo for escalated privileges
+      package:
+        name: sudo
+        state: latest
+      become_user: "root"
     - name: Create user "{{ user }}"
       user:
         home: "/home/{{ user }}/"
