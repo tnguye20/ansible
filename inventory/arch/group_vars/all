@@ -49,3 +49,4 @@ packages:
   - feh
   - python-pip
   - python-pywal
+  - noto-fonts-emoji
