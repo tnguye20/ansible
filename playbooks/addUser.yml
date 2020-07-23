@@ -1,10 +1,10 @@
     - debug:
         msg: "Creating user {{ user }}"
-    - name: Add ansible group
+    - name: Add ansible group and extra groups for other purposes
       group:
-        name: ansible
+        name: "{{ item }}"
         state: present
-      when: "user == 'ansible'"
+      loop: "{{ user_groups }}"
 
     - name: Install sudo for escalated privileges
       package:
